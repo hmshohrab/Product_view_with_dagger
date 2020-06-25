@@ -5,20 +5,6 @@ import io.reactivex.Observable
 import retrofit2.Response
 
 
-fun <T> Observable<Response<T>>.onResponse(): Observable<T> {
-    return map {
-        if (it.isSuccessful) {
-            if (it.body() != null) {
-                it.body()
-            } else {
-                throw Exception("Request Exception")
-            }
-        } else {
-            throw Exception(it.message())
-        }
-    }
-}
-
 fun <T> Maybe<Response<T>>.onResponse(): Maybe<T> {
     return map {
         if (it.isSuccessful) {
